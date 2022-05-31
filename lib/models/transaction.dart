@@ -1,5 +1,5 @@
-import 'package:finance2/models/account.dart';
-import 'package:finance2/models/category.dart';
+import '../models/account.dart';
+import '../models/category.dart';
 import 'package:hive/hive.dart';
 
 part 'transaction.g.dart';
@@ -16,6 +16,10 @@ class Transaction extends HiveObject {
   final int? timestamp;
   @HiveField(5)
   final String? description;
+  @HiveField(6)
+  final int? accountKey;
+  @HiveField(7)
+  final int? categoryKey;
 
   Transaction({
     this.category,
@@ -23,5 +27,7 @@ class Transaction extends HiveObject {
     this.amount,
     this.timestamp,
     this.description,
+    this.accountKey,
+    this.categoryKey,
   });
 }

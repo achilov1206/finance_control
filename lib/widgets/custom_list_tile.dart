@@ -9,6 +9,8 @@ class CustomListTile extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onDismissed;
   final String? snackBarMessage;
+  //data contains subtitle and trailing string
+  //{'subtitle':...,'trailing':...}
   final Map<String, dynamic>? data;
   const CustomListTile({
     Key? key,
@@ -50,7 +52,7 @@ class CustomListTile extends StatelessWidget {
             color: Colors.white,
             child: ListTile(
               leading: Icon(
-                Helpers.retrieveIconFromCodeData(iconCodeData) ?? Icons.circle,
+                Helpers.retrieveIconFromCodeData(iconCodeData),
                 color: Theme.of(context).primaryColor,
               ),
               title: Text(title!),

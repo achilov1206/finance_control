@@ -1,7 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/rendering.dart';
-
 import '../../models/account.dart';
 import '../../models/custom_error.dart';
 import '../../services/account.dart';
@@ -15,7 +13,6 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     this._accountService,
   ) : super(AccountState.initial()) {
     on<LoadAccountsEvent>((event, emit) {
-      print('Account event');
       emit(state.copyWith(accountStatus: AccountStatus.loading));
       try {
         Map<dynamic, Account> accounts = _accountService.getAccounts();
@@ -46,6 +43,14 @@ class AccountBloc extends Bloc<AccountEvent, AccountState> {
     on<UpdateAccountEvent>((event, emit) {
       try {
         _accountService.updateAccount(event.key, event.newAccount);
+        add(LoadAccountsEvent());
+      } catch (e) {
+        print(e.toString());
+      }
+    });
+    on<UpdateAccountBalanceEvent>((event, emit) {
+      try {
+        _accountService.updateAccountBalance(event.key, event.amount);
         add(LoadAccountsEvent());
       } catch (e) {
         print(e.toString());

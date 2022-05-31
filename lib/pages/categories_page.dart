@@ -1,13 +1,16 @@
-import 'package:finance2/models/category.dart';
+import 'package:finance2/models/account.dart';
+import 'package:finance2/pages/app_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../models/category.dart';
 import '../bloc/blocs.dart';
+import '../models/transaction.dart';
 import '../widgets/error_dialog.dart';
 import '../widgets/snackbar.dart';
 import './add_edit_category_page.dart';
 import '../widgets/custom_list_tile.dart';
-import '../widgets/category_type_selector.dart.dart';
 
 class CategoriesPage extends StatefulWidget {
   static const String routeName = '/categories-page';
@@ -19,8 +22,8 @@ class CategoriesPage extends StatefulWidget {
 
 class _CategoriesPageState extends State<CategoriesPage> {
   //Set to true on [didChangeDependencies] first execute
-  bool _init = false;
-  //Containt {value: 000, categoryType: CategoryType, account: accountId}
+  bool _isInit = false;
+  //Containt {value: 000, categoryType: CategoryType, account: MapEntry<dynamic, Account>,}
   Map<String, dynamic>? _args;
 
   //is floating actinon button visible
@@ -65,13 +68,112 @@ class _CategoriesPageState extends State<CategoriesPage> {
     });
   }
 
+  void confirmTransactionDialog(Transaction transaction, int accountKey) {
+    final _formKey = GlobalKey<FormState>();
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        String? description;
+        return AlertDialog(
+          title: const Text(
+            'Do you want to add a new transaction?',
+            style: TextStyle(fontSize: 16),
+          ),
+          content: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(
+                        "[0-9a-zA-Z /-?!#&%()]",
+                      )),
+                    ],
+                    textInputAction: TextInputAction.done,
+                    decoration: InputDecoration(
+                      border: const UnderlineInputBorder(),
+                      labelText: 'Enter a description of the transaction',
+                      floatingLabelStyle: TextStyle(
+                        color: Theme.of(context).primaryColor,
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                      ),
+                    ),
+                    autofocus: true,
+                    onSaved: (value) {
+                      description = value;
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: const Text('No'),
+            ),
+            TextButton(
+              onPressed: () {
+                _formKey.currentState!.save();
+                FocusScope.of(context).requestFocus(FocusNode());
+                Transaction newTransaction = Transaction(
+                  category: transaction.category,
+                  account: transaction.account,
+                  amount: transaction.amount,
+                  timestamp: DateTime.now().millisecondsSinceEpoch,
+                  description: description,
+                  accountKey: transaction.accountKey,
+                  categoryKey: transaction.categoryKey,
+                );
+                showSnackbar(
+                  context,
+                  text: 'Transaction added',
+                  isPop: false,
+                );
+                //add new transaction
+                context.read<TransactionBloc>().add(
+                      CreateTransactionEvent(newTransaction: newTransaction),
+                    );
+                //update category balance
+                context.read<AccountBloc>().add(
+                      UpdateAccountBalanceEvent(
+                        key: accountKey,
+                        amount: transaction.amount!,
+                      ),
+                    );
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AppPage(
+                      activePageIndex: 1,
+                    ),
+                  ),
+                  (route) => false,
+                );
+              },
+              child: const Text('Yes'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   void didChangeDependencies() {
-    if (_init == false) {
+    if (_isInit == false) {
       _args =
           ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     }
-    _init = true;
+    _isInit = true;
     super.didChangeDependencies();
   }
 
@@ -113,7 +215,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
           if (state.categoryStatus == CategoryStatus.loading) {
             return const CircularProgressIndicator();
           } else if (state.categoryStatus == CategoryStatus.error) {
-            errorDialog(context, state.error);
+            Future.delayed(Duration.zero, () {
+              errorDialog(context, state.error);
+            });
           }
           return ListView.builder(
             padding: const EdgeInsets.only(top: 10),
@@ -126,17 +230,35 @@ class _CategoriesPageState extends State<CategoriesPage> {
               if (_args != null) {
                 //Only show categories where category type == args category type
                 if (catValue.categoryType == _args!['categoryType']) {
+                  double amount = _args!['amount'];
+                  //if exepense amount negative value
+                  if (_args!['categoryType'] == CategoryType.expense) {
+                    amount *= -1;
+                  }
                   return CustomListTile(
                     iconCodeData: catValue.icon,
                     title: catValue.title!,
                     dataKey: catKey,
-                    onTap: () {},
+                    onTap: () {
+                      Transaction transaction = Transaction(
+                        category: catValue,
+                        account: _args!['account'].value,
+                        amount: amount,
+                        accountKey: _args!['account'].key,
+                        categoryKey: catKey,
+                      );
+                      confirmTransactionDialog(
+                        transaction,
+                        _args!['account'].key,
+                      );
+                    },
                     onDismissed: () {
                       _onDismissed(catKey);
                     },
                     data: {
                       'subtitle': catValue.description,
-                      'trailing': catValue.categoryType.toString(),
+                      'trailing':
+                          Category.getCategoryString(catValue.categoryType!),
                     },
                   );
                 }

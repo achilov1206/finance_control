@@ -1,9 +1,10 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 part 'account.g.dart';
 
 @HiveType(typeId: 1)
-class Account extends HiveObject {
+class Account extends HiveObject with EquatableMixin {
   @HiveField(0)
   final String? title;
   @HiveField(1)
@@ -19,4 +20,7 @@ class Account extends HiveObject {
     this.balance,
     this.description,
   });
+
+  @override
+  List<Object?> get props => [title, icon, balance, description];
 }

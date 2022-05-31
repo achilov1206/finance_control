@@ -7,7 +7,10 @@ abstract class AccountEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadAccountsEvent extends AccountEvent {}
+class LoadAccountsEvent extends AccountEvent {
+  @override
+  List<Object> get props => [];
+}
 
 class CreateAccountEvent extends AccountEvent {
   final Account newAccount;
@@ -29,6 +32,18 @@ class UpdateAccountEvent extends AccountEvent {
 
   @override
   List<Object> get props => [key, newAccount];
+}
+
+class UpdateAccountBalanceEvent extends AccountEvent {
+  final int key;
+  final double amount;
+  const UpdateAccountBalanceEvent({
+    required this.key,
+    required this.amount,
+  });
+
+  @override
+  List<Object> get props => [key, amount];
 }
 
 class RemoveAccountEvent extends AccountEvent {

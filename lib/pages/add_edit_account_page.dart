@@ -25,7 +25,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
   final _formKey = GlobalKey<FormState>();
   //if true edit account
   //else create new account
-  bool edit = false;
+  bool isEdit = false;
   String? title;
   Map<String, dynamic>? icon;
   double? balance;
@@ -34,7 +34,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
   @override
   void initState() {
     if (widget.account != null) {
-      edit = true;
+      isEdit = true;
       title = widget.account!.title;
       icon = widget.account!.icon;
       balance = widget.account!.balance ?? 0;
@@ -49,7 +49,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: edit
+        title: isEdit
             ? const Text('Create new account')
             : const Text('Edit account'),
       ),
@@ -100,12 +100,15 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                 ),
                 //Account initial balance field
                 TextFormField(
+                  readOnly: isEdit,
                   keyboardType: TextInputType.number,
                   initialValue: balance!.toStringAsFixed(2),
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
-                    labelText: 'Enter account initial balance',
+                    labelText: isEdit
+                        ? 'Account balance'
+                        : 'Enter account initial balance',
                     floatingLabelStyle: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
@@ -159,7 +162,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                           balance: balance,
                           description: description,
                         );
-                        if (edit) {
+                        if (isEdit) {
                           //Update account by key
                           context.read<AccountBloc>().add(
                                 UpdateAccountEvent(
@@ -187,7 +190,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                         Navigator.pop(context);
                       }
                     },
-                    child: edit
+                    child: isEdit
                         ? const Text('Update account')
                         : const Text('Create account'),
                   ),

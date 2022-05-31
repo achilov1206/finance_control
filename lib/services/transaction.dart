@@ -1,17 +1,22 @@
 import 'package:hive/hive.dart';
+import 'package:deep_collection/deep_collection.dart';
 import '../models/transaction.dart';
 
 class TransactionService {
   late Box<Transaction> _transactions;
+
+  TransactionService() {
+    init();
+  }
 
   Future<void> init() async {
     Hive.registerAdapter(TransactionAdapter());
     _transactions = await Hive.openBox('transactions');
   }
 
-  List<Transaction> getTransactions() {
-    final transactions = _transactions.values.toList();
-    return transactions;
+  Map<dynamic, Transaction> getTransactions() {
+    final transactions = _transactions.toMap();
+    return transactions.deepReverse();
   }
 
   Transaction? getTransaction(String key) {
@@ -22,12 +27,11 @@ class TransactionService {
     _transactions.add(newTransaction);
   }
 
-  Future<void> removeTransaction(String key) async {
+  Future<void> removeTransaction(int key) async {
     await _transactions.delete(key);
   }
 
-  Future<void> updateTransaction(String key, Transaction newTransaction) async {
-    final index = int.parse(key);
-    await _transactions.put(index, newTransaction);
+  Future<void> updateTransaction(int key, Transaction newTransaction) async {
+    await _transactions.put(key, newTransaction);
   }
 }

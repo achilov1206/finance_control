@@ -14,23 +14,25 @@ class CalculatorButton extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: () {
-        onPressed!();
-      },
-      onLongPress: () {
-        if (onLongPress != null) {
-          onLongPress!();
-        }
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(0.2),
-        child: Text(
-          buttonText!,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
+    return ButtonTheme(
+      child: OutlinedButton(
+        onPressed: () {
+          onPressed!();
+        },
+        onLongPress: () {
+          if (onLongPress != null) {
+            onLongPress!();
+          }
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(0.2),
+          child: Text(
+            buttonText!,
+            style: const TextStyle(
+              color: Colors.black,
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),

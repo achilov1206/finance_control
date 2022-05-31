@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class Helpers {
   static Map<String, dynamic> iconToCodeData(IconData icon) {
@@ -10,8 +11,7 @@ class Helpers {
     };
   }
 
-  static IconData? retrieveIconFromCodeData(
-      Map<String, dynamic>? iconCodeData) {
+  static IconData retrieveIconFromCodeData(Map<String, dynamic>? iconCodeData) {
     if (iconCodeData != null) {
       return IconData(
         iconCodeData['icon_code_point'],
@@ -20,6 +20,18 @@ class Helpers {
         matchTextDirection: iconCodeData['icon_direction'],
       );
     }
-    return null;
+    return Icons.circle;
+  }
+
+  static timestampFormatMMMEd(int timestamp) {
+    return DateFormat.MMMEd().add_jm().format(
+          DateTime.fromMillisecondsSinceEpoch(
+            timestamp,
+          ),
+        );
+  }
+
+  static dateFormatMMMEd(DateTime dateTime) {
+    return DateFormat.MMMEd().format(dateTime);
   }
 }

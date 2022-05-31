@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 
 part 'category.g.dart';
@@ -11,7 +12,7 @@ enum CategoryType {
 }
 
 @HiveType(typeId: 2)
-class Category extends HiveObject {
+class Category extends HiveObject with EquatableMixin {
   @HiveField(0)
   final String? title;
   @HiveField(1)
@@ -27,4 +28,11 @@ class Category extends HiveObject {
     this.description,
     this.categoryType,
   });
+
+  static String getCategoryString(CategoryType catType) {
+    return catType == CategoryType.expense ? 'Expense' : 'Income';
+  }
+
+  @override
+  List<Object?> get props => [title, icon, description, categoryType];
 }

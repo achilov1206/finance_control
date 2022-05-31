@@ -91,7 +91,9 @@ class _AccountsPageState extends State<AccountsPage> {
           if (state.accountStatus == AccountStatus.loading) {
             return const CircularProgressIndicator();
           } else if (state.accountStatus == AccountStatus.error) {
-            errorDialog(context, state.error);
+            Future.delayed(Duration.zero, () {
+              errorDialog(context, state.error);
+            });
           }
           return ListView.builder(
             padding: const EdgeInsets.only(top: 10),

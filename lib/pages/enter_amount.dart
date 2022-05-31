@@ -1,6 +1,7 @@
 import 'package:finance2/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
+import '../utils/helpers.dart';
 import '../widgets/calculator_button.dart';
 import 'categories_page.dart';
 
@@ -20,7 +21,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
   var _isNextPressed = false;
   //status of widget, set to true once widget built first time
   bool _init = false;
-  //argumets received from router {'account': 'accountId','categoryType': CategoryType,}
+  //argumets received from router {'account': MapEntry<dynamic, Account>,'categoryType': CategoryType,}
   Map<String, dynamic>? _args;
 
   @override
@@ -120,7 +121,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
     //Calculate math expression final value
     _equalPressed();
     Navigator.pushNamed(context, CategoriesPage.routeName, arguments: {
-      'value': double.parse(_userInput),
+      'amount': double.parse(_userInput),
       'categoryType': _args!['categoryType'],
       'account': _args!['account'],
     });
@@ -129,9 +130,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
   @override
   Widget build(BuildContext context) {
     String appBarTitle =
-        'Enter' + _args!['categoryType'] == CategoryType.expense
-            ? 'exspense'
-            : 'income';
+        'Enter ${Category.getCategoryString(_args!['categoryType'])}';
     return Scaffold(
       appBar: AppBar(
         title: Text(appBarTitle),
@@ -178,6 +177,55 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
       ),
       body: Column(
         children: <Widget>[
+          SizedBox(
+            height: 40,
+            child: Container(
+              color: Colors.grey,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Helpers.retrieveIconFromCodeData(
+                            _args!['account'].value.icon,
+                          ),
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        const SizedBox(width: 5),
+                        SizedBox(
+                          width: 150,
+                          child: Text(
+                            '${_args!['account'].value.title} account',
+                            overflow: TextOverflow.clip,
+                            softWrap: true,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Flexible(
+                      child: Text(
+                        'Balance: ${_args!['account'].value.balance}',
+                        overflow: TextOverflow.clip,
+                        softWrap: true,
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
           Expanded(
             flex: 1,
             child: Column(
@@ -198,7 +246,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 4,
             //height: 460,
             child: GridView.builder(
               itemCount: _buttons.length,
@@ -215,6 +263,9 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
                           //remove last character from userInput
                           _userInput =
                               _userInput.substring(0, _userInput.length - 1);
+                          if (_userInput.isEmpty) {
+                            _isNextPressed = false;
+                          }
                         }
                       });
                     },
@@ -223,6 +274,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
                       setState(() {
                         _userInput = '';
                         _isOperandHave = false;
+                        _isNextPressed = false;
                       });
                     },
                     buttonText: _buttons[index],

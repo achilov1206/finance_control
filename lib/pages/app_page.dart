@@ -1,39 +1,36 @@
-import 'package:finance2/bloc/blocs.dart';
-import 'package:flutter/material.dart';
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import './home_page.dart';
-import './transactions_page.dart';
-import './statistics_page.dart';
-import './settings_page.dart';
+import '../bloc/blocs.dart';
 import './add_transaction_page.dart';
+import './home_page.dart';
+import './settings_page.dart';
+import './statistics_page.dart';
+import './transactions_page.dart';
 
 class AppPage extends StatefulWidget {
-  const AppPage({Key? key}) : super(key: key);
+  final int? activePageIndex;
+  const AppPage({
+    Key? key,
+    this.activePageIndex,
+  }) : super(key: key);
 
   @override
   State<AppPage> createState() => _AppPageState();
 }
 
 class _AppPageState extends State<AppPage> {
+  int _activePageIndex = 0;
   @override
   void initState() {
+    if (widget.activePageIndex != null) {
+      _activePageIndex = widget.activePageIndex!;
+    }
     super.initState();
-
-    //Register Hive database
-    //BlocProvider.of<InitBloc>(context).add(RegisterServiceEvent());
-    //Get all accounts
-    //BlocProvider.of<AccountBloc>(context).add(LoadAccountsEvent());
   }
 
-  @override
-  void dispose() {
-    print('App page disposed');
-    super.dispose();
-  }
-
-  var _activePageIndex = 0;
   _selectedPage(index) {
     setState(() {
       _activePageIndex = index;
@@ -49,9 +46,11 @@ class _AppPageState extends State<AppPage> {
 
   @override
   Widget build(BuildContext context) {
-    //Load accounts
+    //Load All Data
     context.read<AccountBloc>().add(LoadAccountsEvent());
     context.read<CategoryBloc>().add(LoadCategoriesEvent());
+    context.read<TransactionBloc>().add(LoadTransactionsEvent());
+
     return Scaffold(
       body: IndexedStack(
         children: _pages,
@@ -59,7 +58,7 @@ class _AppPageState extends State<AppPage> {
       ),
       bottomNavigationBar: AnimatedBottomNavigationBar(
         activeColor: Theme.of(context).primaryColor,
-        splashColor: Colors.pink[200],
+        splashColor: Theme.of(context).primaryColor,
         inactiveColor: Colors.black.withOpacity(0.5),
         icons: const [
           Icons.home,
@@ -85,7 +84,7 @@ class _AppPageState extends State<AppPage> {
           Icons.add,
           size: 25,
         ),
-        backgroundColor: Colors.pink,
+        backgroundColor: Theme.of(context).primaryColor,
         heroTag: null,
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

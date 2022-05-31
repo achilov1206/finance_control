@@ -14,7 +14,6 @@ class CategoryBloc extends Bloc<CategoryEvent, CategoryState> {
     this._categoryService,
   ) : super(CategoryState.initial()) {
     on<LoadCategoriesEvent>((event, emit) {
-      print('Load Categories event');
       emit(state.copyWith(categoryStatus: CategoryStatus.loading));
       try {
         Map<dynamic, Category> categories = _categoryService.getCategories();

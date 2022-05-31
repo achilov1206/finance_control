@@ -18,16 +18,6 @@ class AccountState extends Equatable {
       error: CustomError(),
     );
   }
-  // Map<dynamic, Account> get expenses {
-  //   if (accounts.isNotEmpty) {
-  //     Map<dynamic, Account> _expenses;
-  //     accounts.forEach((key, value) {
-  //       if(value.)
-  //     });
-  //   }
-  //   return {};
-  // }
-
   @override
   List<Object?> get props => [accounts, accountStatus, error];
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './todays_page.dart';
-import './month_page.dart';
+import './home/todays_page.dart';
+import './home/month_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

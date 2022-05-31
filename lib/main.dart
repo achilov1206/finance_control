@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final appDocumentDirectory =
       await path_provider.getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
+  await Hive.initFlutter(appDocumentDirectory.path);
 
   runApp(
     const MyApp(),
@@ -35,6 +35,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(create: (context) => AccountService()),
@@ -43,18 +44,15 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider<InitBloc>(
-            create: (context) => InitBloc(
-              accountService: context.read<AccountService>(),
-              categoryService: context.read<CategoryService>(),
-              transactionService: context.read<TransactionService>(),
-            ),
-          ),
           BlocProvider<CategoryBloc>(
             create: (context) => CategoryBloc(context.read<CategoryService>()),
           ),
           BlocProvider<AccountBloc>(
             create: (context) => AccountBloc(context.read<AccountService>()),
+          ),
+          BlocProvider<TransactionBloc>(
+            create: (context) =>
+                TransactionBloc(context.read<TransactionService>()),
           ),
         ],
         child: MaterialApp(
