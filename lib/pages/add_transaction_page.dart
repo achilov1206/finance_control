@@ -1,7 +1,6 @@
-import 'package:finance2/services/account.dart';
-import 'package:finance2/services/category.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/blocs.dart';
 import '../models/account.dart';
 import '../widgets/error_dialog.dart';
@@ -47,7 +46,7 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
     final appbar = AppBar(
-      title: const Text('New transactions'),
+      title: Text(AppLocalizations.of(context)!.new_transactions),
     );
     return Scaffold(
       appBar: appbar,
@@ -68,14 +67,14 @@ class _AddTransactionPageState extends State<AddTransactionPage> {
               return ListView(
                 children: [
                   CustomExpansionTile(
-                    title: 'Expense',
+                    title: AppLocalizations.of(context)!.expense,
                     children: accountListTile(
                       state.accounts,
                       CategoryType.expense,
                     ),
                   ),
                   CustomExpansionTile(
-                    title: 'Income',
+                    title: AppLocalizations.of(context)!.income,
                     children: accountListTile(
                       state.accounts,
                       CategoryType.income,

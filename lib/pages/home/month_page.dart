@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../bloc/blocs.dart';
 import '../../widgets/custom_piechart.dart';
 import '../../widgets/error_dialog.dart';
@@ -50,7 +50,8 @@ class MonthPage extends StatelessWidget {
                                   Icons.remove_circle,
                                   color: Theme.of(context).primaryColor,
                                 ),
-                                title: const Text('Expanses'),
+                                title: Text(
+                                    AppLocalizations.of(context)!.expenses),
                                 trailing: Text(
                                   _totalExpanses.toStringAsFixed(2),
                                 ),
@@ -66,7 +67,8 @@ class MonthPage extends StatelessWidget {
                                   Icons.add_circle,
                                   color: Theme.of(context).primaryColor,
                                 ),
-                                title: const Text('Incomes'),
+                                title:
+                                    Text(AppLocalizations.of(context)!.incomes),
                                 trailing: Text(
                                   _totalIncomes.toStringAsFixed(2),
                                 ),

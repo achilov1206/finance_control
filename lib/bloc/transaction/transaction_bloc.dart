@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:finance2/models/category_total_amount.dart';
-import '../../models/account.dart';
+import '../../models/category_total_amount.dart';
 import '../../models/category.dart';
 import '../../models/transaction.dart';
 import '../../models/custom_error.dart';

@@ -10,8 +10,7 @@ class TransactionService {
   }
 
   Future<void> init() async {
-    Hive.registerAdapter(TransactionAdapter());
-    _transactions = await Hive.openBox('transactions');
+    _transactions = Hive.box<Transaction>('transactions');
   }
 
   Map<dynamic, Transaction> getTransactions() {

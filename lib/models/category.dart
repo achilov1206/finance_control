@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:hive/hive.dart';
 
 part 'category.g.dart';
@@ -29,8 +30,10 @@ class Category extends HiveObject with EquatableMixin {
     this.categoryType,
   });
 
-  static String getCategoryString(CategoryType catType) {
-    return catType == CategoryType.expense ? 'Expense' : 'Income';
+  static String getCategoryString(CategoryType catType, context) {
+    return catType == CategoryType.expense
+        ? AppLocalizations.of(context)!.expense
+        : AppLocalizations.of(context)!.income;
   }
 
   @override

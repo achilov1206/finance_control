@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/blocs.dart';
-import '../models/account.dart';
 import '../models/category.dart';
 import '../utils/helpers.dart';
 import '../widgets/snackbar.dart';
@@ -42,11 +40,6 @@ class TransactionListTile extends StatelessWidget {
     return Text(balance);
   }
 
-  String timeString(int timestamp) {
-    DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(timestamp);
-    return DateFormat.jm().format(dateTime);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -70,9 +63,10 @@ class TransactionListTile extends StatelessWidget {
           ),
           subtitle: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                timeString(transactionValue.timestamp!),
+                Helpers.dateFormatJm(transactionValue.timestamp!, context),
                 overflow: TextOverflow.clip,
                 softWrap: true,
               ),
@@ -119,7 +113,10 @@ class TransactionListTile extends StatelessWidget {
           context.read<TransactionBloc>().add(
                 RemoveTransactionEvent(key: transactionKey),
               );
-          showSnackbar(context, text: 'Transaction deleted');
+          showSnackbar(
+            context,
+            text: AppLocalizations.of(context)!.transaction_deleted,
+          );
         },
         confirmDismiss: (_) {
           return showDialog(
@@ -127,9 +124,8 @@ class TransactionListTile extends StatelessWidget {
             barrierDismissible: false,
             builder: (context) {
               return DialogWithCheckbox(
-                title: 'Are you sure you want to delete?',
-                checkboxText:
-                    'Do you want to restore the transaction amount to the card balance?',
+                title: AppLocalizations.of(context)!.del_confirm2,
+                checkboxText: AppLocalizations.of(context)!.transaction_restore,
                 beforeDelete: () {
                   //restore the transaction amount to the card balance if checked
                   double amount = transactionValue.amount! * -1;

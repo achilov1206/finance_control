@@ -1,9 +1,8 @@
-import 'package:finance2/models/account.dart';
-import 'package:finance2/pages/app_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/category.dart';
 import '../bloc/blocs.dart';
 import '../models/transaction.dart';
@@ -11,6 +10,7 @@ import '../widgets/error_dialog.dart';
 import '../widgets/snackbar.dart';
 import './add_edit_category_page.dart';
 import '../widgets/custom_list_tile.dart';
+import '../pages/app_page.dart';
 
 class CategoriesPage extends StatefulWidget {
   static const String routeName = '/categories-page';
@@ -76,9 +76,9 @@ class _CategoriesPageState extends State<CategoriesPage> {
       builder: (BuildContext context) {
         String? description;
         return AlertDialog(
-          title: const Text(
-            'Do you want to add a new transaction?',
-            style: TextStyle(fontSize: 16),
+          title: Text(
+            AppLocalizations.of(context)!.add_new_transaction,
+            style: const TextStyle(fontSize: 16),
           ),
           content: Form(
             key: _formKey,
@@ -96,7 +96,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     textInputAction: TextInputAction.done,
                     decoration: InputDecoration(
                       border: const UnderlineInputBorder(),
-                      labelText: 'Enter a description of the transaction',
+                      labelText: AppLocalizations.of(context)!
+                          .enter_transaction_description,
                       floatingLabelStyle: TextStyle(
                         color: Theme.of(context).primaryColor,
                       ),
@@ -135,7 +136,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 );
                 showSnackbar(
                   context,
-                  text: 'Transaction added',
+                  text:
+                      AppLocalizations.of(context)!.snackbar_transaction_added,
                   isPop: false,
                 );
                 //add new transaction
@@ -159,7 +161,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   (route) => false,
                 );
               },
-              child: const Text('Yes'),
+              child: Text(AppLocalizations.of(context)!.yes),
             ),
           ],
         );
@@ -181,12 +183,15 @@ class _CategoriesPageState extends State<CategoriesPage> {
   Widget build(BuildContext context) {
     void _onDismissed(key) {
       context.read<CategoryBloc>().add(RemoveCategoryEvent(key: key));
-      showSnackbar(context, text: 'Category deleted');
+      showSnackbar(
+        context,
+        text: AppLocalizations.of(context)!.category_deleted,
+      );
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Category'),
+        title: Text(AppLocalizations.of(context)!.category),
       ),
       floatingActionButton: AnimatedOpacity(
         duration: const Duration(milliseconds: 600),
@@ -205,7 +210,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
               : null,
           heroTag: 'addCategoryButton',
           label: Row(
-            children: const [Icon(Icons.save), Text('Add Category')],
+            children: [
+              const Icon(Icons.save),
+              Text(AppLocalizations.of(context)!.add_category),
+            ],
           ),
         ),
       ),
@@ -257,8 +265,10 @@ class _CategoriesPageState extends State<CategoriesPage> {
                     },
                     data: {
                       'subtitle': catValue.description,
-                      'trailing':
-                          Category.getCategoryString(catValue.categoryType!),
+                      'trailing': Category.getCategoryString(
+                        catValue.categoryType!,
+                        context,
+                      ),
                     },
                   );
                 }
@@ -283,12 +293,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
                   onDismissed: () {
                     _onDismissed(catKey);
                   },
-                  snackBarMessage: 'Category deleted',
+                  snackBarMessage:
+                      AppLocalizations.of(context)!.category_deleted,
                   data: {
                     'subtitle': catValue.description,
                     'trailing': catValue.categoryType == CategoryType.expense
-                        ? 'Expense'
-                        : 'Income',
+                        ? AppLocalizations.of(context)!.expense
+                        : AppLocalizations.of(context)!.income,
                   },
                 );
               }

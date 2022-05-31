@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_grid/responsive_grid.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../add_edit_account_page.dart';
 import '../app_page.dart';
 import '../../bloc/blocs.dart';
@@ -35,9 +35,9 @@ class _TodayPageState extends State<TodayPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'Last Transactions',
-                      style: TextStyle(
+                    Text(
+                      AppLocalizations.of(context)!.last_transactions,
+                      style: const TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ),
@@ -55,8 +55,11 @@ class _TodayPageState extends State<TodayPage> {
                           } else if (state.transactionStatus ==
                               TransactionStatus.loaded) {
                             if (state.lastTransactions.isEmpty) {
-                              return const Center(
-                                child: Text("No transactions for today"),
+                              return Center(
+                                child: Text(
+                                  AppLocalizations.of(context)!
+                                      .no_transactions_for_today,
+                                ),
                               );
                             }
                             return ListView.builder(
@@ -84,6 +87,7 @@ class _TodayPageState extends State<TodayPage> {
                                     subtitle: Text(
                                       Helpers.timestampFormatMMMEd(
                                         transactionValue.timestamp!,
+                                        context,
                                       ),
                                     ),
                                     trailing: Text(
@@ -109,7 +113,7 @@ class _TodayPageState extends State<TodayPage> {
                       height: 40,
                       width: double.infinity,
                       child: ElevatedButton(
-                        child: const Text('Show more'),
+                        child: Text(AppLocalizations.of(context)!.show_more),
                         onPressed: () {
                           Navigator.pushAndRemoveUntil(
                             context,

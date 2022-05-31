@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/helpers.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DateRangeSelector extends StatefulWidget {
   final Function onDateSelected;
@@ -33,7 +34,7 @@ class _DateRangeSelectorState extends State<DateRangeSelector> {
       firstDate: DateTime(2022, 1, 1),
       lastDate: DateTime(2030, 12, 31),
       currentDate: DateTime.now(),
-      saveText: 'Done',
+      saveText: AppLocalizations.of(context)!.date_range_picker_save,
     );
 
     if (result != null) {
@@ -58,7 +59,13 @@ class _DateRangeSelectorState extends State<DateRangeSelector> {
           GestureDetector(
             onTap: _show,
             child: Text(
-              '${Helpers.dateFormatMMMEd(_startDate!)} - ${Helpers.dateFormatMMMEd(_endDate!)}',
+              '${Helpers.dateFormatMMMEd(
+                _startDate!,
+                context,
+              )} - ${Helpers.dateFormatMMMEd(
+                _endDate!,
+                context,
+              )}',
             ),
           ),
           Icon(

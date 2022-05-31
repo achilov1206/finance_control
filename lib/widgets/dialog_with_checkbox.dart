@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class DialogWithCheckbox extends StatefulWidget {
   final String title;
@@ -51,7 +52,7 @@ class _DialogWithCheckboxState extends State<DialogWithCheckbox> {
           onPressed: () {
             Navigator.pop(context, false);
           },
-          child: const Text('No'),
+          child: Text(AppLocalizations.of(context)!.no),
         ),
         TextButton(
           onPressed: () {
@@ -60,7 +61,7 @@ class _DialogWithCheckboxState extends State<DialogWithCheckbox> {
             }
             Navigator.pop(context, true);
           },
-          child: const Text('Yes'),
+          child: Text(AppLocalizations.of(context)!.yes),
         ),
       ],
     );

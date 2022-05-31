@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/category.dart';
 import '../models/category_total_amount.dart';
 
@@ -10,7 +11,8 @@ class CustomPieChart extends StatelessWidget {
     required this.categoryTotalAmountData,
   }) : super(key: key);
 
-  List<Widget> chartLabels(List<CategoryTotalAmount> catTotalAmountData) {
+  List<Widget> chartLabels(
+      List<CategoryTotalAmount> catTotalAmountData, context) {
     List<Widget> _chartLabels = [];
     for (CategoryTotalAmount data in catTotalAmountData) {
       _chartLabels.add(
@@ -24,7 +26,8 @@ class CustomPieChart extends StatelessWidget {
                   color: data.color,
                 ),
                 Text(
-                  Category.getCategoryString(data.category!.categoryType!) +
+                  Category.getCategoryString(
+                          data.category!.categoryType!, context) +
                       ':',
                 ),
                 const SizedBox(width: 10),
@@ -64,11 +67,11 @@ class CustomPieChart extends StatelessWidget {
                     animate: true,
                   ),
                 ),
-                ...chartLabels(categoryTotalAmountData),
+                ...chartLabels(categoryTotalAmountData, context),
               ],
             )
-          : const Center(
-              child: Text('There are no transactions'),
+          : Center(
+              child: Text(AppLocalizations.of(context)!.no_transactions),
             ),
     );
   }

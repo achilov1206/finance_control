@@ -2,6 +2,7 @@ import 'package:finance2/bloc/account/account_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../models/account.dart';
 import '../widgets/icon_picker.dart';
@@ -50,8 +51,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
     return Scaffold(
       appBar: AppBar(
         title: isEdit
-            ? const Text('Create new account')
-            : const Text('Edit account'),
+            ? Text(AppLocalizations.of(context)!.create_new_account)
+            : Text(AppLocalizations.of(context)!.edit_account),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -71,7 +72,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
-                    labelText: 'Enter account title',
+                    labelText:
+                        AppLocalizations.of(context)!.enter_account_title,
                     floatingLabelStyle:
                         TextStyle(color: Theme.of(context).primaryColor),
                     focusedBorder: UnderlineInputBorder(
@@ -81,7 +83,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter title';
+                      return AppLocalizations.of(context)!.please_enter_title;
                     }
                     return null;
                   },
@@ -107,8 +109,9 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
                     labelText: isEdit
-                        ? 'Account balance'
-                        : 'Enter account initial balance',
+                        ? AppLocalizations.of(context)!.account_balance
+                        : AppLocalizations.of(context)!
+                            .enter_account_initial_balance,
                     floatingLabelStyle: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
@@ -133,7 +136,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
-                    labelText: 'Enter account description',
+                    labelText:
+                        AppLocalizations.of(context)!.enter_account_description,
                     floatingLabelStyle: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
@@ -172,7 +176,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                               );
                           showSnackbar(
                             context,
-                            text: 'Account updated',
+                            text: AppLocalizations.of(context)!
+                                .snackbar_account_updated,
                             isPop: true,
                           );
                         } else {
@@ -182,7 +187,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                               .add(CreateAccountEvent(newAccount: newAccount));
                           showSnackbar(
                             context,
-                            text: 'New account created',
+                            text: AppLocalizations.of(context)!
+                                .snackbar_account_created,
                             isPop: true,
                           );
                         }
@@ -191,8 +197,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                       }
                     },
                     child: isEdit
-                        ? const Text('Update account')
-                        : const Text('Create account'),
+                        ? Text(AppLocalizations.of(context)!.update_account)
+                        : Text(AppLocalizations.of(context)!.create_account),
                   ),
                 ),
               ],

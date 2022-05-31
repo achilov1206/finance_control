@@ -11,9 +11,7 @@ class CategoryService {
   }
 
   Future<void> init() async {
-    Hive.registerAdapter(CategoryAdapter());
-    Hive.registerAdapter(CategoryTypeAdapter());
-    _categories = await Hive.openBox('categories');
+    _categories = Hive.box<Category>('categories');
     if (_categories.isEmpty) {
       Category salary = Category(
         title: 'Salary',
@@ -33,9 +31,9 @@ class CategoryService {
         icon: Helpers.iconToCodeData(Icons.shopping_bag),
         description: 'Shopping',
       );
-      _categories.add(salary);
-      _categories.add(food);
-      _categories.add(shopping);
+      await _categories.add(salary);
+      await _categories.add(food);
+      await _categories.add(shopping);
     }
   }
 

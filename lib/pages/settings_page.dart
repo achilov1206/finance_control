@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './accounts_page.dart';
 import './categories_page.dart';
 
@@ -9,7 +10,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Settings'),
+        title: Text(AppLocalizations.of(context)!.settings),
       ),
       body: Container(
         margin: const EdgeInsets.all(10),
@@ -31,8 +32,8 @@ class SettingsPage extends StatelessWidget {
                     Icons.grid_4x4,
                     color: Theme.of(context).primaryColor,
                   ),
-                  title: const Text('Categories'),
-                  subtitle: const Text('Manage categories'),
+                  title: Text(AppLocalizations.of(context)!.categories),
+                  subtitle: Text(AppLocalizations.of(context)!.manage_category),
                 ),
               ),
             ),
@@ -53,8 +54,8 @@ class SettingsPage extends StatelessWidget {
                     Icons.grid_4x4,
                     color: Theme.of(context).primaryColor,
                   ),
-                  title: const Text('Accounts'),
-                  subtitle: const Text('Manage accounts'),
+                  title: Text(AppLocalizations.of(context)!.accounts),
+                  subtitle: Text(AppLocalizations.of(context)!.manage_account),
                 ),
               ),
             ),

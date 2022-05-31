@@ -1,7 +1,6 @@
+import 'package:hive/hive.dart';
 import '../models/account.dart';
 import '../models/category.dart';
-import 'package:hive/hive.dart';
-
 part 'transaction.g.dart';
 
 @HiveType(typeId: 3)

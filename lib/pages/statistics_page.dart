@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import './statistics/categories_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import './statistics/expenses_page.dart';
 import './statistics/incomes_page.dart';
 import './statistics/summory_page.dart';
@@ -14,7 +13,7 @@ class StatisticsPage extends StatelessWidget {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Statistics'),
+          title: Text(AppLocalizations.of(context)!.statistics),
           bottom: PreferredSize(
             preferredSize: const Size(double.infinity, 50),
             child: Container(
@@ -26,18 +25,18 @@ class StatisticsPage extends StatelessWidget {
                 labelColor: Theme.of(context).primaryColor,
                 unselectedLabelColor: Colors.grey,
                 indicatorColor: Theme.of(context).primaryColor,
-                tabs: const [
+                tabs: [
                   Text(
-                    'EXPENSES',
-                    style: TextStyle(fontSize: 16),
+                    AppLocalizations.of(context)!.expenses.toUpperCase(),
+                    style: const TextStyle(fontSize: 16),
                   ),
                   Text(
-                    'INCOMES',
-                    style: TextStyle(fontSize: 16),
+                    AppLocalizations.of(context)!.incomes.toUpperCase(),
+                    style: const TextStyle(fontSize: 16),
                   ),
                   Text(
-                    'SUMMORY',
-                    style: TextStyle(fontSize: 16),
+                    AppLocalizations.of(context)!.summory.toUpperCase(),
+                    style: const TextStyle(fontSize: 16),
                   ),
                   // Text(
                   //   'CATEGORIES',

@@ -1,0 +1,252 @@
+{
+    "expense" : "Expense",
+    "@expense" : {
+        "description": "Expense"
+    },
+    "income" : "Income",
+    "@income" : {
+        "description": "Income"
+    },
+    "expenses" : "Expenses",
+    "@expenses" : {
+        "description": "Expenses"
+    },
+    "incomes" : "Incomes",
+    "@incomes" : {
+        "description": "Incomes"
+    },
+    "del_confirm1" : "Are you sure?",
+    "@del_confirm1" : {
+        "description" : "Delete confirmation message"
+    },
+    "del_confirm2" : "Are you sure you want to delete?",
+    "@del_confirm2" : {
+        "description" : "Delete confirmation message"
+    },
+    "yes" : "Yes",
+    "@yes" : {
+        "description" : "Yes"
+    },
+    "no" : "No",
+    "@no" : {
+        "description" : "No"
+    },
+    "no_transactions" : "There are no transactions",
+    "@no_transactions" : {
+        "description" : "There are no transactions"
+    },
+    "date_range_picker_save" : "Done",
+    "@date_range_picker_save" : {
+        "description" : "Data Range picker save button text"
+    },
+    "ok" : "Ok",
+    "@ok" : {
+        "description" : "Ok confirmation word"
+    },
+    "icon_picker_select_icon": "Select Icon",
+    "@icon_picker_select_icon":{
+        "description" : "Icon picker select icon text"
+    },
+    "snackbar_goback_button" : "Go back",
+    "@snackbar_goback_button" : {
+        "description" : "SnackBar go back button text"
+    },
+    "transaction_deleted" : "Transaction deleted",
+    "@transaction_deleted": {
+        "description" : "Transaction deleted"
+    },
+    "transaction_restore": "Do you want to restore the transaction amount to the card balance?",
+    "@transaction_restore": {
+        "description" : "Transaction amount restore"
+    },
+    "last_transactions" : "Last Transactions",
+    "@last_transactions": {
+        "description" : "Last Transactions"
+    },
+    "no_transactions_for_today" : "No transactions for today",
+    "@no_transactions_for_today": {
+        "description" : "No transactions for today"
+    },
+    "show_more" : "Show more",
+    "@show_more": {
+        "description" : "Show more"
+    },
+    "account" : "Account",
+    "@account": {
+        "description" : "Account"
+    },
+    "add_account" : "Add Account",
+    "@add_account": {
+        "description" : "Add Account"
+    },
+    "account_deleted": "Account deleted",
+    "@account_deleted": {
+        "description" : "Add deleted message"
+    },
+    "create_new_account": "Create new account",
+    "@create_new_account": {
+        "description" : "Create new account"
+    },
+    "edit_account": "Edit account",
+    "@edit_account": {
+        "description" : "Edit account"
+    },
+    "enter_account_title" : "Enter account title",
+    "@enter_account_title" : {
+        "description" : "Enter account title"
+    },
+    "please_enter_title" : "Please enter title",
+    "@please_enter_title" : {
+        "description" : "Please enter title"
+    },
+    "account_balance" : "Account balance",
+    "@account_balance" : {
+        "description" : "Account balance"
+    },
+    "enter_account_initial_balance" : "Enter account initial balance",
+    "@enter_account_initial_balance" : {
+        "description" : "Enter account initial balance"
+    },
+    "enter_account_description" : "Enter account description",
+    "@enter_account_description" : {
+        "description" : "Enter account description"
+    },
+    "snackbar_account_updated" : "Account updated",
+    "@snackbar_account_updated" : {
+        "description" : "Account updated"
+    },
+    "snackbar_account_created" : "New account created",
+    "@snackbar_account_created" : {
+        "description" : "New account created"
+    },
+    "update_account" : "Update account",
+    "@update_account" : {
+        "description" : "Update account"
+    },
+    "create_account" : "Create account",
+    "@create_account" : {
+        "description" : "Create account"
+    },
+    "create_new_category" : "Create new category",
+    "@create_new_category" : {
+        "description" : "Create new category"
+    },
+    "edit_category" : "Edit category",
+    "@edit_category" : {
+        "description" : "Edit category"
+    },
+    "enter_category_title" : "Enter category title",
+    "@enter_category_title" : {
+        "description" : "Enter category title"
+    },
+    "select_category_type" : "Select category type",
+    "@select_category_type" : {
+        "description" : "Select category type"
+    },
+    "enter_category_description" : "Enter category description",
+    "@enter_category_description" : {
+        "description" : "Enter category description"
+    },
+
+    "snackbar_category_updated" : "Category updated",
+    "@snackbar_category_updated" : {
+        "description" : "Category updated"
+    },
+    "snackbar_category_created" : "New category created",
+    "@snackbar_category_created" : {
+        "description" : "New category created"
+    },
+    "update_category" : "Update Category",
+    "@update_category" : {
+        "description" : "Update Category"
+    },
+    "create_category" : "Create Category",
+    "@create_category" : {
+        "description" : "Create Category"
+    },
+
+    "new_transactions" : "New transactions",
+    "@new_transactions" : {
+        "description" : "New transactions"
+    },
+    "add_new_transaction" : "Do you want to add a new transaction?",
+    "@add_new_transaction" : {
+        "description" : "Do you want to add a new transaction?"
+    },
+    "enter_transaction_description" : "Enter a description of the transaction",
+    "@enter_transaction_description" : {
+        "description" : "Enter a description of the transaction"
+    },
+    "snackbar_transaction_added" : "Transaction added",
+    "@transaction_added" : {
+        "description" : "Transaction added"
+    },
+    "category_deleted" : "Category deleted",
+    "@category_deleted" : {
+        "description" : "Category deleted"
+    },
+    "category" : "Category",
+    "@category" : {
+        "description" : "Category"
+    },
+    "add_category" : "Add Category",
+    "@add_category" : {
+        "description" : "Add Category"
+    },
+    "enter" : "Enter",
+    "@enter" : {
+        "description" : "Enter"
+    },
+    "next" : "Next",
+    "@next" : {
+        "description" : "Next"
+    },
+    "balance" : "Balance",
+    "@balance" : {
+        "description" : "Balance"
+    },
+    "overview" : "OverView",
+    "@overview" : {
+        "description" : "OverView"
+    },
+    "today" : "TODAY",
+    "@today" : {
+        "description" : "TODAY"
+    },
+    "this_month" : "THIS MONTH",
+    "@this_month" : {
+        "description" : "THIS MONTH"
+    },
+    "settings" : "Settings",
+    "@settings" : {
+        "description" : "Settings"
+    },
+    "categories" : "Categories",
+    "@categories" : {
+        "description" : "Categories"
+    },
+    "manage_category" : "Manage categories",
+    "@manage_category" : {
+        "description" : "Manage category"
+    },
+    "accounts" : "Accounts",
+    "@accounts" : {
+        "description" : "Accounts"
+    },
+    "manage_account" : "Manage account",
+    "@manage_account" : {
+        "description" : "Manage account"
+    },
+    "statistics" : "Statistics",
+    "@statistics" : {
+        "description" : "Statistics"
+    },
+    "summory" : "SUMMORY",
+    "@summory" : {
+        "description" : "SUMMORY"
+    },
+    "transactions" : "Transactions",
+    "@transactions" : {
+        "description" : "Transactions"
+    }
+}

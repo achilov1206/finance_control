@@ -12,8 +12,7 @@ class AccountService {
   }
 
   Future<void> init() async {
-    Hive.registerAdapter(AccountAdapter());
-    _accounts = await Hive.openBox<Account>('accounts');
+    _accounts = Hive.box<Account>('accounts');
     if (_accounts.isEmpty) {
       Account card = Account(
         title: 'Card',
@@ -27,8 +26,8 @@ class AccountService {
         balance: 0,
         description: 'Cash',
       );
-      _accounts.add(card);
-      _accounts.add(cash);
+      await _accounts.add(card);
+      await _accounts.add(cash);
     }
   }
 

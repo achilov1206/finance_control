@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/blocs.dart';
 import '../models/category.dart';
 import '../widgets/snackbar.dart';
@@ -55,8 +56,8 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
     return Scaffold(
       appBar: AppBar(
         title: edit
-            ? const Text('Create new category')
-            : const Text('Edit category'),
+            ? Text(AppLocalizations.of(context)!.create_new_category)
+            : Text(AppLocalizations.of(context)!.edit_category),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -76,7 +77,8 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
-                    labelText: 'Enter category title',
+                    labelText:
+                        AppLocalizations.of(context)!.enter_category_title,
                     floatingLabelStyle:
                         TextStyle(color: Theme.of(context).primaryColor),
                     focusedBorder: UnderlineInputBorder(
@@ -86,7 +88,7 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter title';
+                      return AppLocalizations.of(context)!.please_enter_title;
                     }
                     return null;
                   },
@@ -105,7 +107,8 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
                 ),
                 //Select Category Type
                 CategoryTypeSelector(
-                  dropdownHint: 'Select category type',
+                  dropdownHint:
+                      AppLocalizations.of(context)!.select_category_type,
                   onValueChanged: (CategoryType catType) {
                     categoryType = catType;
                   },
@@ -123,7 +126,8 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                     border: const UnderlineInputBorder(),
-                    labelText: 'Enter category description',
+                    labelText: AppLocalizations.of(context)!
+                        .enter_category_description,
                     floatingLabelStyle: TextStyle(
                       color: Theme.of(context).primaryColor,
                     ),
@@ -160,17 +164,17 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
                                   newCategory: newCategory,
                                 ),
                               );
-                          showSnackbar(
-                            context,
-                            text: 'Category updated',
-                          );
+                          showSnackbar(context,
+                              text: AppLocalizations.of(context)!
+                                  .snackbar_category_updated);
                         } else {
                           //Create new category
                           context.read<CategoryBloc>().add(
                               CreateCategoryEvent(newCategory: newCategory));
                           showSnackbar(
                             context,
-                            text: 'New category created',
+                            text: AppLocalizations.of(context)!
+                                .snackbar_category_created,
                           );
                         }
                         _formKey.currentState!.reset();
@@ -178,8 +182,8 @@ class _AddEditCategoryPageState extends State<AddEditCategoryPage> {
                       }
                     },
                     child: edit
-                        ? const Text('Update Category')
-                        : const Text('Create Category'),
+                        ? Text(AppLocalizations.of(context)!.update_category)
+                        : Text(AppLocalizations.of(context)!.create_category),
                   ),
                 ),
               ],

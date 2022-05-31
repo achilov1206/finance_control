@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class Helpers {
   static Map<String, dynamic> iconToCodeData(IconData icon) {
@@ -23,15 +25,26 @@ class Helpers {
     return Icons.circle;
   }
 
-  static timestampFormatMMMEd(int timestamp) {
-    return DateFormat.MMMEd().add_jm().format(
+  static timestampFormatMMMEd(int timestamp, context) {
+    String languageCode = AppLocalizations.of(context)!.localeName;
+    return DateFormat.MMMEd(languageCode).add_jm().format(
           DateTime.fromMillisecondsSinceEpoch(
             timestamp,
           ),
         );
   }
 
-  static dateFormatMMMEd(DateTime dateTime) {
-    return DateFormat.MMMEd().format(dateTime);
+  static dateFormatMMMEd(DateTime dateTime, context) {
+    String languageCode = AppLocalizations.of(context)!.localeName;
+    return DateFormat.MMMEd(languageCode).format(dateTime);
+  }
+
+  static dateFormatJm(int timestamp, context) {
+    String languageCode = AppLocalizations.of(context)!.localeName;
+    return DateFormat.jm(languageCode).format(
+      DateTime.fromMillisecondsSinceEpoch(
+        timestamp,
+      ),
+    );
   }
 }

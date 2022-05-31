@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconpicker/flutter_iconpicker.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../utils/helpers.dart';
 
@@ -43,7 +44,7 @@ class _IconPickerState extends State<IconPicker> {
       children: [
         ElevatedButton(
           onPressed: _pickIcon,
-          child: const Text('Select Icon'),
+          child: Text(AppLocalizations.of(context)!.icon_picker_select_icon),
           style: ElevatedButton.styleFrom(
             primary: Theme.of(context).primaryColor,
           ),

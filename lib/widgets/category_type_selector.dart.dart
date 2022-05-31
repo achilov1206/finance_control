@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/category.dart';
 
 class CategoryTypeSelector extends StatefulWidget {
@@ -36,19 +36,19 @@ class _CategoryTypeSelectorState extends State<CategoryTypeSelector> {
           size: 20,
           color: Theme.of(context).primaryColor,
         ),
-        items: const [
+        items: [
           DropdownMenuItem<CategoryType>(
             value: CategoryType.expense,
             child: Text(
-              'Expense',
-              style: TextStyle(fontSize: 16),
+              AppLocalizations.of(context)!.expense,
+              style: const TextStyle(fontSize: 16),
             ),
           ),
           DropdownMenuItem<CategoryType>(
             value: CategoryType.income,
             child: Text(
-              'Income',
-              style: TextStyle(fontSize: 16),
+              AppLocalizations.of(context)!.income,
+              style: const TextStyle(fontSize: 16),
             ),
           ),
         ],

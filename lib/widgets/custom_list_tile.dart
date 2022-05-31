@@ -1,6 +1,7 @@
-import 'package:finance2/widgets/snackbar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../utils/helpers.dart';
+import '../widgets/snackbar.dart';
 
 class CustomListTile extends StatelessWidget {
   final Map<String, dynamic>? iconCodeData;
@@ -79,16 +80,16 @@ class CustomListTile extends StatelessWidget {
             barrierDismissible: false,
             builder: (context) {
               return AlertDialog(
-                title: const Text('Are you sure?'),
-                content: const Text('Do yot really want to delete?'),
+                title: Text(AppLocalizations.of(context)!.del_confirm1),
+                content: Text(AppLocalizations.of(context)!.del_confirm2),
                 actions: [
                   TextButton(
                     onPressed: () => Navigator.pop(context, false),
-                    child: const Text('No'),
+                    child: Text(AppLocalizations.of(context)!.no),
                   ),
                   TextButton(
                     onPressed: () => Navigator.pop(context, true),
-                    child: const Text('Yes'),
+                    child: Text(AppLocalizations.of(context)!.yes),
                   ),
                 ],
               );

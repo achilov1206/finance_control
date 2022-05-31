@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/custom_error.dart';
 
 void errorDialog(BuildContext context, CustomError e) {
@@ -14,7 +14,7 @@ void errorDialog(BuildContext context, CustomError e) {
           content: Text(e.plugin + '\n' + e.message),
           actions: [
             CupertinoDialogAction(
-              child: const Text('Ok'),
+              child: Text(AppLocalizations.of(context)!.ok),
               onPressed: () => Navigator.pop(context),
             ),
           ],
@@ -30,7 +30,7 @@ void errorDialog(BuildContext context, CustomError e) {
             content: Text(e.plugin + '\n' + e.message),
             actions: [
               TextButton(
-                child: const Text('Ok'),
+                child: Text(AppLocalizations.of(context)!.ok),
                 onPressed: () => Navigator.pop(context),
               ),
             ],

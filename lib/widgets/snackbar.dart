@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void showSnackbar(context, {text, isPop}) {
   ScaffoldMessenger.of(context).hideCurrentSnackBar();
@@ -13,7 +14,7 @@ void showSnackbar(context, {text, isPop}) {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('Go back'),
+              child: Text(AppLocalizations.of(context)!.snackbar_goback_button),
             ),
         ],
       ),

@@ -1,9 +1,10 @@
 import 'package:finance2/models/category.dart';
 import 'package:flutter/material.dart';
 import 'package:math_expressions/math_expressions.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../utils/helpers.dart';
 import '../widgets/calculator_button.dart';
-import 'categories_page.dart';
+import './categories_page.dart';
 
 class EnterAmountPage extends StatefulWidget {
   static const routeName = '/enter-amount';
@@ -130,7 +131,10 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
   @override
   Widget build(BuildContext context) {
     String appBarTitle =
-        'Enter ${Category.getCategoryString(_args!['categoryType'])}';
+        '${AppLocalizations.of(context)!.enter} ${Category.getCategoryString(
+      _args!['categoryType'],
+      context,
+    )}';
     return Scaffold(
       appBar: AppBar(
         title: Text(appBarTitle),
@@ -164,7 +168,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
                 alignment: Alignment.center,
                 width: 100,
                 child: Text(
-                  'NEXT >',
+                  '${AppLocalizations.of(context)!.next} >',
                   style: TextStyle(
                     fontSize: 22,
                     color: _isNextPressed ? Colors.white : Colors.grey,
@@ -198,7 +202,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
                         SizedBox(
                           width: 150,
                           child: Text(
-                            '${_args!['account'].value.title} account',
+                            '${_args!['account'].value.title} ${AppLocalizations.of(context)!.account}',
                             overflow: TextOverflow.clip,
                             softWrap: true,
                             style: const TextStyle(
@@ -211,7 +215,7 @@ class _EnterAmountPageState extends State<EnterAmountPage> {
                     ),
                     Flexible(
                       child: Text(
-                        'Balance: ${_args!['account'].value.balance}',
+                        '${AppLocalizations.of(context)!.balance}: ${_args!['account'].value.balance}',
                         overflow: TextOverflow.clip,
                         softWrap: true,
                         style: const TextStyle(

@@ -1,8 +1,9 @@
-import 'package:finance2/bloc/account/account_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import '../bloc/blocs.dart';
 import '../widgets/custom_list_tile.dart';
 import '../widgets/error_dialog.dart';
 import './add_edit_account_page.dart';
@@ -62,7 +63,7 @@ class _AccountsPageState extends State<AccountsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Account'),
+        title: Text(AppLocalizations.of(context)!.account),
       ),
       floatingActionButton: AnimatedOpacity(
         duration: const Duration(milliseconds: 600),
@@ -81,7 +82,10 @@ class _AccountsPageState extends State<AccountsPage> {
               : null,
           heroTag: 'addAccountButton',
           label: Row(
-            children: const [Icon(Icons.save), Text('Add Account')],
+            children: [
+              const Icon(Icons.save),
+              Text(AppLocalizations.of(context)!.add_account),
+            ],
           ),
         ),
       ),
@@ -124,7 +128,7 @@ class _AccountsPageState extends State<AccountsPage> {
                         RemoveAccountEvent(key: accountKey),
                       );
                 },
-                snackBarMessage: 'Account deleted',
+                snackBarMessage: AppLocalizations.of(context)!.account_deleted,
                 data: {
                   'subtitle': accountValue.description,
                   'trailing': accountValue.balance.toString(),

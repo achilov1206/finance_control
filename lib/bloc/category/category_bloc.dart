@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:finance2/services/category.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../models/custom_error.dart';
 import '../../models/category.dart';
+import '../../services/category.dart';
 
 part 'category_event.dart';
 part 'category_state.dart';
