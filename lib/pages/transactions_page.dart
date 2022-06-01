@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../bloc/blocs.dart';
 import '../widgets/error_dialog.dart';
 import '../widgets/transaction_list_tile.dart';
+import '../utils/helpers.dart';
 
 class TransactionsPage extends StatefulWidget {
   const TransactionsPage({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _TransactionsPageState extends State<TransactionsPage> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            DateFormat.MMMEd().format(dateLabel),
+            Helpers.dateFormatMMMEd(dateLabel, context),
             style: const TextStyle(
               color: Colors.black,
               fontSize: 16,

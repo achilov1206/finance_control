@@ -30,9 +30,15 @@ class _IconPickerState extends State<IconPicker> {
     IconData? iconData = await FlutterIconPicker.showIconPicker(
       context,
       iconPackModes: [IconPack.cupertino],
+      title: Text(AppLocalizations.of(context)!.pick_an_icon),
+      closeChild: Text(AppLocalizations.of(context)!.close),
+      searchHintText: AppLocalizations.of(context)!.search,
+      noResultsText: AppLocalizations.of(context)!.no_results_for,
     );
     setState(() {
-      _selectedIconCodeData = Helpers.iconToCodeData(iconData!);
+      if (iconData != null) {
+        _selectedIconCodeData = Helpers.iconToCodeData(iconData);
+      }
     });
     widget.onSelect!(_selectedIconCodeData);
   }

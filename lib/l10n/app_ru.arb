@@ -60,5 +60,9 @@
     "manage_account" : "Настроить аккаунт",
     "statistics" : "Статистика",
     "summory" : "Cуммарно",
-    "transactions" : "Транзакции"
+    "transactions" : "Транзакции",
+    "pick_an_icon" : "Выберите значок",
+    "close" : "Закрыть",
+    "search" : "Поиск",
+    "no_results_for" : "Нет результатов для:"
 }

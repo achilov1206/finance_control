@@ -248,5 +248,21 @@
     "transactions" : "Transactions",
     "@transactions" : {
         "description" : "Transactions"
+    },
+    "pick_an_icon" : "Pick an icon",
+    "@pick_an_icon" : {
+        "description" : "Pick an icon for icon picker"
+    },
+    "close" : "Close",
+    "@close" : {
+        "description" : "Close"
+    },
+    "search" : "Search",
+    "@search" : {
+        "description" : "Search"
+    },
+    "no_results_for" : "No results for:",
+    "@no_results_for" : {
+        "description" : "No results for icon search"
     }
 }
