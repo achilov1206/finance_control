@@ -7,6 +7,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../models/account.dart';
 import '../widgets/icon_picker.dart';
 import '../widgets/snackbar.dart';
+import '../widgets/currency_picker.dart';
 
 class AddEditAccountPage extends StatefulWidget {
   //Account not null if edit
@@ -31,6 +32,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
   Map<String, dynamic>? icon;
   double? balance;
   String? description;
+  String? currencySymbol;
 
   @override
   void initState() {
@@ -40,6 +42,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
       icon = widget.account!.icon;
       balance = widget.account!.balance ?? 0;
       description = widget.account!.description;
+      currencySymbol = widget.account!.currencyCode;
     } else {
       balance = 0;
     }
@@ -51,8 +54,8 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
     return Scaffold(
       appBar: AppBar(
         title: isEdit
-            ? Text(AppLocalizations.of(context)!.create_new_account)
-            : Text(AppLocalizations.of(context)!.edit_account),
+            ? Text(AppLocalizations.of(context)!.edit_account)
+            : Text(AppLocalizations.of(context)!.create_new_account),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
@@ -120,6 +123,13 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                         color: Theme.of(context).primaryColor,
                       ),
                     ),
+                    //Select currency
+                    suffix: CurrencyPicker(
+                      onCurrencySelected: (String symbol) {
+                        currencySymbol = symbol;
+                      },
+                      currencySymbol: currencySymbol,
+                    ),
                   ),
                   onSaved: (value) {
                     balance = double.parse(value ?? '0');
@@ -165,6 +175,7 @@ class _AddEditAccountPageState extends State<AddEditAccountPage> {
                           icon: icon,
                           balance: balance,
                           description: description,
+                          currencyCode: currencySymbol,
                         );
                         if (isEdit) {
                           //Update account by key

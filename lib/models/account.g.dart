@@ -21,13 +21,14 @@ class AccountAdapter extends TypeAdapter<Account> {
       icon: (fields[1] as Map?)?.cast<String, dynamic>(),
       balance: fields[2] as double?,
       description: fields[3] as String?,
+      currencyCode: fields[4] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Account obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.title)
       ..writeByte(1)
@@ -35,7 +36,9 @@ class AccountAdapter extends TypeAdapter<Account> {
       ..writeByte(2)
       ..write(obj.balance)
       ..writeByte(3)
-      ..write(obj.description);
+      ..write(obj.description)
+      ..writeByte(4)
+      ..write(obj.currencyCode);
   }
 
   @override

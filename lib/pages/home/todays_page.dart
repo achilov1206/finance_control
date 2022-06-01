@@ -178,6 +178,9 @@ class _TodayPageState extends State<TodayPage> {
                                         .toStringAsFixed(2),
                                     overflow: TextOverflow.ellipsis,
                                   ),
+                                  trailing: Text(
+                                    accountMap.value.currencyCode!,
+                                  ),
                                   onTap: () {
                                     Navigator.push(
                                       context,

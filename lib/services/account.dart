@@ -19,12 +19,14 @@ class AccountService {
         icon: Helpers.iconToCodeData(Icons.credit_card),
         balance: 0,
         description: 'Credit card',
+        currencyCode: 'UZS',
       );
       Account cash = Account(
         title: 'Cash',
         icon: Helpers.iconToCodeData(Icons.money),
         balance: 0,
         description: 'Cash',
+        currencyCode: 'UZS',
       );
       await _accounts.add(card);
       await _accounts.add(cash);

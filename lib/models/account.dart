@@ -13,14 +13,17 @@ class Account extends HiveObject with EquatableMixin {
   final double? balance;
   @HiveField(3)
   final String? description;
+  @HiveField(4)
+  final String? currencyCode;
 
   Account({
     this.title,
     this.icon,
     this.balance,
     this.description,
+    this.currencyCode,
   });
 
   @override
-  List<Object?> get props => [title, icon, balance, description];
+  List<Object?> get props => [title, icon, balance, description, currencyCode];
 }
